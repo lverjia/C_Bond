@@ -1,4 +1,4 @@
-import datetime  #共270行代码，当精简之。20220907
+import datetime  #来自知识星球：量化分析与程序交易。在优矿运行。共270行代码，当精简之。20220907
 import numpy as np
 import copy
 import pandas as pd
