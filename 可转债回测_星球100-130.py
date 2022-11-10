@@ -20,7 +20,7 @@ hold_num = 10        # 持有转债的个数
 history_profit=[]
 daily_netvalue =[]
 holding_list=[]
-ratation_list=[]
+rotation_list=[]
 EB_ENABLE=False
 refresh_rate = 1 # 调仓频率，表示执行handle_data的时间间隔，若freq = 'd' 时间间隔的单位为交易日，取盘前数据，若freq = 'm' 时间间隔为分钟
 
@@ -30,12 +30,12 @@ def formator():
     
 def initialize(context):
     global MyPosition, HighValue, MyCash, Withdraw, HoldRank, HoldNum,Start_Cash
-    MyPosition = {}  #持仓
-    MyCash = 1000000  #现金
+    MyPosition = {}     #持仓
+    MyCash = 1000000    #现金
     Start_Cash= 1000000
     HighValue = MyCash  #最高市值
-    Withdraw = 0  #最大回撤
-    HoldRank = hold_num  #排名多少之后卖出
+    Withdraw = 0        #最大回撤
+    HoldRank = hold_num #排名多少之后卖出
     HoldNum = hold_num  #持债支数
     
 def get_bonds_list(beginDate=u"20170101", endDate=u"20201215"): #获取可转债代码、简称和正股代码。
@@ -100,7 +100,7 @@ def get_position_netvalue(today_date):
     # ==================================================================================================
     
 def handle_data(context):    
-    global MyPosition, HighValue, MyCash, Withdraw, HoldRank, HoldNum, Start_Cash, threshold,history_profit,current_day,holding_list,daily_netvalue,ratation_list
+    global MyPosition, HighValue, MyCash, Withdraw, HoldRank, HoldNum, Start_Cash, threshold,history_profit,current_day,holding_list,daily_netvalue,rotation_list
     previous_date = context.previous_date.strftime('%Y%m%d')
     today_date = context.now.strftime('%Y%m%d')
 
@@ -133,7 +133,7 @@ def handle_data(context):
 
     temp_df=data[:HoldNum + extra_num].copy()
     temp_df['tradeDate']=today_date
-    ratation_list.append(temp_df)
+    rotation_list.append(temp_df)
     PosValue = MyCash
     
     # if HoldNum > len(data):
